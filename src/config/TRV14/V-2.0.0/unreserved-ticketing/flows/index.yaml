@@ -14,6 +14,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_seller_pagination_1
         type: on_search
         unsolicited: false
@@ -47,6 +55,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -80,6 +96,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -191,6 +215,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -262,6 +294,125 @@ flows:
         pair: null
         owner: BPP
         expect: false
+  - id: purchase_journey_order_level_forms_culture_heritage
+    tags: ["PRAMAAN", "MANDATORY", "REPORTABLE","WORKBENCH"]
+    description: Purchase Journey:Order Level Forms (Additional Flow:Culture-Heritage)
+    sequence:
+      - key: search_incremental_pull
+        type: search
+        unsolicited: false
+        pair: on_search_incremental_pull_1
+        owner: BAP
+        expect: true
+        input:
+          - name: city_code
+            label: Enter city code
+            type: text
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
+      - key: on_search_incremental_pull_1
+        type: on_search
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_search_incremental_pull_2
+        type: on_search
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+      - key: on_search_incremental_pull_3
+        type: on_search
+        unsolicited: true
+        pair: null
+        owner: BPP
+        expect: false
+
+      - key: select
+        type: select
+        unsolicited: false
+        pair: on_select_submission_cultural
+        owner: BAP
+        expect: true
+        input:
+          - name: select_input
+            label: Enter
+            type: trv_select
+      - key: on_select_submission_cultural
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: first_form_testing
+        label: form link provided in on_select
+        type: HTML_FORM
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+        input:
+          - name: form_submission_id
+            label: Enter Form Submission id
+            type: HTML_FORM
+            reference: $.reference_data.first_form_testing
+      - key: select_form_submission_cultural
+        type: select
+        unsolicited: false
+        pair: on_select_form_submission_culture
+        owner: BAP
+        expect: false
+        force_proceed: true
+      - key: on_select_form_submission_culture
+        type: on_select
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: init
+        type: init
+        unsolicited: false
+        pair: on_init
+        owner: BAP
+        expect: false
+      - key: on_init
+        type: on_init
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: confirm
+        type: confirm
+        unsolicited: false
+        pair: on_confirm
+        owner: BAP
+        expect: false
+      - key: on_confirm
+        type: on_confirm
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
+      - key: status
+        type: status
+        unsolicited: false
+        pair: on_status
+        owner: BAP
+        expect: false
+      - key: on_status
+        type: on_status
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false
   
   - id: purchase_journey_with_form_Multiple_Tickets
     tags: ["PRAMAAN", "MANDATORY", "REPORTABLE","WORKBENCH"]
@@ -278,6 +429,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -390,6 +549,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -477,6 +644,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -560,7 +735,7 @@ flows:
         unsolicited: false
         pair: null
         owner: BPP
-        expect: false    
+        expect: false  
       - key: cancel_confirm_technical_cancellation
         type: cancel
         unsolicited: false
@@ -588,6 +763,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -684,6 +867,18 @@ flows:
         pair: null
         owner: BPP
         expect: false
+      - key: cancel_soft_technical_cancellation
+        type: cancel
+        unsolicited: false
+        pair: on_cancel_soft_technical_cancellation
+        owner: BAP
+        expect: false
+      - key: on_cancel_soft_technical_cancellation
+        type: on_cancel
+        unsolicited: false
+        pair: null
+        owner: BPP
+        expect: false  
       - key: cancel_confirm_technical_cancellation
         type: cancel
         unsolicited: false
@@ -712,6 +907,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -724,6 +927,7 @@ flows:
         pair: null
         owner: BPP
         expect: false
+        
       - key: on_search_incremental_pull_3
         type: on_search
         unsolicited: true
@@ -822,6 +1026,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -943,7 +1155,7 @@ flows:
         owner: BPP
         expect: false
 
-  - id: User Cancellation (Partial)
+  - id: user_cancellation_partial
     tags: ["WORKBENCH", "MANDATORY"]
     description: Partial Cancellation flow (cancel 1 quantity of item)
     sequence:
@@ -958,6 +1170,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -1023,6 +1243,14 @@ flows:
         pair: on_update_soft_partial_cancellation
         owner: BAP
         expect: false
+        input:
+          - name: select_item
+            label: Select Item
+            type: text
+          - name: select_quantity
+            label: Select Quantity
+            type: text
+
       - key: on_update_soft_partial_cancellation
         type: on_update
         unsolicited: false
@@ -1056,6 +1284,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -1116,18 +1352,6 @@ flows:
         pair: null
         owner: BPP
         expect: false
-      - key: status
-        type: status
-        unsolicited: false
-        pair: on_status_technical_cancellation
-        owner: BAP
-        expect: false
-      - key: on_status_technical_cancellation
-        type: on_status
-        unsolicited: false
-        pair: null
-        owner: BPP
-        expect: false
       - key: cancel_soft_technical_cancellation
         type: cancel
         unsolicited: false
@@ -1142,7 +1366,7 @@ flows:
         expect: false
 
   - id: purchase_journey_without_form_with_IGM(v-2.0.0)
-    tags: ["MANDATORY","WORKBENCH"]
+    tags: ["PRAMAAN", "MANDATORY", "REPORTABLE","WORKBENCH"]
     description: purchase journey select to on_status without form
     sequence:
       - key: search_incremental_pull
@@ -1156,6 +1380,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -1328,7 +1560,7 @@ flows:
       #   expect: false  
 
   - id: purchase_journey_without_form_with_IGM_Rejection(v-2.0.0)
-    tags: ["MANDATORY","WORKBENCH"]
+    tags: ["PRAMAAN", "MANDATORY", "REPORTABLE","WORKBENCH"]
     description: purchase journey select to on_status without form
     sequence:
       - key: search_incremental_pull
@@ -1342,6 +1574,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -1542,7 +1782,7 @@ flows:
       #   expect: false  
 
   - id: purchase_journey_without_form_with_IGM_No_Action(v-2.0.0)
-    tags: ["MANDATORY", "WORKBENCH"]
+    tags: ["PRAMAAN", "MANDATORY", "REPORTABLE","WORKBENCH"]
     description: purchase journey select to on_status without form
     sequence:
       - key: search_incremental_pull
@@ -1556,6 +1796,14 @@ flows:
             label: Enter city code
             type: text
             payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].location.city.code
+          - name: start_time
+            label: Enter start time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.start
+          - name: end_time
+            label: Enter end time
+            type: datetime-local
+            payloadField: $.message.intent.fulfillment.stops[?(@.type=='START')].time.range.end
       - key: on_search_incremental_pull_1
         type: on_search
         unsolicited: false
@@ -1703,3 +1951,4 @@ flows:
       #   description: Status updates - order delivered  
     
         
+
